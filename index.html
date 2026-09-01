@@ -25,6 +25,8 @@
       margin: 0;
       min-height: 100%;
       background: var(--blush);
+      scroll-behavior: auto;
+      overflow-anchor: none;
     }
 
     body {
@@ -222,5 +224,26 @@
 
     <a class="registry-link" href="https://withjoy.com/dawn-and-andy-sep-2026/registry" target="_blank" rel="noopener noreferrer">View Wedding Registry</a>
   </main>
+
+  <script>
+    (() => {
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
+
+      const resetToTop = () => {
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+        window.scrollTo(0, 0);
+      };
+
+      window.addEventListener("load", resetToTop);
+      window.addEventListener("pageshow", () => {
+        resetToTop();
+        requestAnimationFrame(resetToTop);
+        setTimeout(resetToTop, 120);
+      });
+    })();
+  </script>
 </body>
 </html>
